@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Адмін-панель</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="admin">
+
+    <nav>
+        <a href="index.html">На головну</a>
+        <button id="logout-btn"
+            style="background:#c0392b; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-left:20px; font-size:14px;">Вийти</button>
+    </nav>
+
+    <div class="container">
+        <h1>Адміністративна панель</h1>
+
+        <h2>Зареєстровані користувачі</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я</th>
+                    <th>Email</th>
+                    <th>Дата реєстрації</th>
+                </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+        </table>
+
+        <hr>
+
+        <h2>Бронювання</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Користувач</th>
+                    <th>Номер</th>
+                    <th>Дати</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody id="bookings-tbody"></tbody>
+        </table>
+
+        <hr>
+
+        <h2>Управління цінами</h2>
+        <p style="color:#777; font-size:14px;">Зміни зберігаються і одразу відображаються в калькуляторі на сторінці
+            номерів.</p>
+        <div id="prices-form"></div>
+
+    </div>
+
+    <footer>© 2026 VitaRelax · м. Одеса</footer>
+    <script src="admin.js"></script>
+</body>
+
+</html>

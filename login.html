@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Вхід</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="login">
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="about.html">Про нас</a>
+        <a href="services.html">Послуги</a>
+        <a href="rooms.html">Номери</a>
+        <a href="login.html">Вхід</a>
+    </nav>
+
+    <div class="container">
+        <h1>Вхід</h1>
+
+        <form id="login-form">
+            <label for="login-email">Логін</label>
+            <input type="text" id="login-email" placeholder="your@gmail.com" autocomplete="email">
+
+            <label for="login-password">Пароль</label>
+            <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+
+            <p id="login-error" style="color:red; margin:0; font-size:14px;"></p>
+
+            <input type="submit" value="Увійти">
+        </form>
+
+        <hr>
+        <p><a href="register.html">Реєстрація</a></p>
+    </div>
+
+    <footer>© 2026 VitaRelax · м. Одеса</footer>
+    <script src="validation.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

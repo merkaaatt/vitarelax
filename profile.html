@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Мій кабінет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="about.html">Про нас</a>
+        <a href="services.html">Послуги</a>
+        <a href="rooms.html">Номери</a>
+        <a href="login.html">Вхід</a>
+    </nav>
+
+    <div class="container">
+        <h1>Мій кабінет</h1>
+
+        <h2>Інформація про акаунт</h2>
+        <div class="profile-info-block">
+            <p><strong>Ім'я:</strong> <span id="profile-name-display">—</span></p>
+            <p><strong>Email:</strong> <span id="profile-email-display">—</span></p>
+        </div>
+
+        <hr>
+
+        <h2>Змінити ім'я</h2>
+        <form id="change-name-form">
+            <label for="new-name">Нове ім'я</label>
+            <input type="text" id="new-name" placeholder="Іван Петренко" autocomplete="name">
+            <input type="submit" value="Зберегти ім'я">
+        </form>
+
+        <hr>
+
+        <h2>Змінити пароль</h2>
+        <form id="change-password-form">
+            <label for="old-password">Поточний пароль</label>
+            <input type="password" id="old-password" placeholder="••••••••">
+
+            <label for="new-password">Новий пароль</label>
+            <input type="password" id="new-password" placeholder="••••••••">
+
+            <label for="confirm-password">Підтвердження нового пароля</label>
+            <input type="password" id="confirm-password" placeholder="••••••••">
+
+            <input type="submit" value="Змінити пароль">
+        </form>
+
+        <hr>
+
+        <h2>Мої бронювання</h2>
+        <p><a href="bookings.html">Переглянути мої бронювання →</a></p>
+    </div>
+
+    <footer>© 2026 VitaRelax · м. Одеса</footer>
+    <script src="validation.js"></script>
+    <script src="profile.js"></script>
+</body>
+
+</html>

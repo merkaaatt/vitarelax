@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Номери</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="about.html">Про нас</a>
+        <a href="services.html">Послуги</a>
+        <a href="rooms.html">Номери</a>
+        <a href="login.html">Вхід</a>
+    </nav>
+
+    <div class="container">
+        <h1>Номери санаторію "VitaRelax"</h1>
+        <p>У вартість входить триразове харчування та базові оздоровчі процедури.</p>
+
+        <hr>
+
+        <div class="room-block">
+            <div class="room-info">
+                <h2>Стандарт</h2>
+                <ul>
+                    <li>Ліжко</li>
+                    <li>Телевізор</li>
+                    <li>Ванна кімната</li>
+                    <li>Шафа</li>
+                </ul>
+                <p><strong>Ціна:</strong> <span id="price-label-standard">1000</span> грн/доба</p>
+            </div>
+            <img src="stan2.jpg" alt="Стандартний номер" class="room-image">
+        </div>
+
+        <hr>
+
+        <div class="room-block">
+            <div class="room-info">
+                <h2>Покращений</h2>
+                <ul>
+                    <li>Велике ліжко</li>
+                    <li>Кондиціонер</li>
+                    <li>Телевізор</li>
+                    <li>Балкон</li>
+                </ul>
+                <p><strong>Ціна:</strong> <span id="price-label-improved">1500</span> грн/доба</p>
+            </div>
+            <img src="pkr.jpg" alt="Покращений номер" class="room-image">
+        </div>
+
+        <hr>
+
+        <div class="room-block">
+            <div class="room-info">
+                <h2>Люкс</h2>
+                <ul>
+                    <li>Двоспальне ліжко</li>
+                    <li>Міні-бар</li>
+                    <li>Кондиціонер</li>
+                    <li>Окрема вітальня</li>
+                </ul>
+                <p><strong>Ціна:</strong> <span id="price-label-lux">2000</span> грн/доба</p>
+            </div>
+            <img src="lux.jpg" alt="Номер Люкс" class="room-image">
+        </div>
+
+        <hr>
+
+        <div id="booking-section">
+
+        </div>
+
+        <hr>
+
+        <div class="calculator-block">
+            <h2>Розрахунок вартості перебування</h2>
+            <p style="color:#777; font-size:14px;">Оберіть параметри - сума розрахується автоматично</p>
+
+            <div class="calc-grid">
+                <div class="calc-field">
+                    <label>Тип номера</label>
+                    <select id="calc-room"></select>
+                </div>
+                <div class="calc-field">
+                    <label>Кількість діб</label>
+                    <input type="number" id="calc-days" value="3" min="1" max="90">
+                </div>
+                <div class="calc-field">
+                    <label>Кількість осіб</label>
+                    <select id="calc-persons">
+                        <option value="1">1 особа</option>
+                        <option value="2">2 особи</option>
+                        <option value="3">3 особи (+10%)</option>
+                        <option value="4">4 особи (+20%)</option>
+                        <option value="5">5 осіб (+30%)</option>
+                        <option value="6">6 осіб (+40%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calc-services">
+                <label class="calc-services-title">Додаткові послуги (за весь термін):</label>
+                <div class="calc-services-list" id="calc-services-list"></div>
+            </div>
+
+            <div class="calc-result" id="calc-result">
+                <div class="calc-result-label">Орієнтовна вартість:</div>
+                <div class="calc-result-amount" id="calc-amount">— грн</div>
+                <div class="calc-result-breakdown" id="calc-breakdown"></div>
+            </div>
+
+            <div style="text-align:center; margin-top:20px;">
+                <a href="login.html" class="cta-button">Забронювати</a>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+    <script>
+        // ===== ЦІНИ ЗА ЗАМОВЧУВАННЯМ =====
+        const PRICES_DEFAULT = {
+            rooms: { standard: 1000, improved: 1500, lux: 2000 },
+            services: { massage: 500, pool: 300, physio: 400 }
+        };
+
+        function getActualPrices() {
+            const saved = localStorage.getItem("vitarelax_prices");
+            return saved ? JSON.parse(saved) : PRICES_DEFAULT;
+        }
+
+        function initCalculator() {
+            const p = getActualPrices();
+
+            document.getElementById("calc-room").innerHTML = `
+                    <option value="${p.rooms.standard}">Стандарт - ${p.rooms.standard} грн/доба</option>
+                    <option value="${p.rooms.improved}">Покращений - ${p.rooms.improved} грн/доба</option>
+                    <option value="${p.rooms.lux}">Люкс - ${p.rooms.lux} грн/доба</option>
+                `;
+
+            document.getElementById("calc-services-list").innerHTML = `
+                    <label class="calc-checkbox">
+                        <input type="checkbox" id="svc-massage" value="${p.services.massage}"> Масаж - ${p.services.massage} грн
+                    </label>
+                    <label class="calc-checkbox">
+                        <input type="checkbox" id="svc-pool" value="${p.services.pool}"> Басейн - ${p.services.pool} грн
+                    </label>
+                    <label class="calc-checkbox">
+                        <input type="checkbox" id="svc-physio" value="${p.services.physio}"> Фізіотерапія - ${p.services.physio} грн
+                    </label>
+                `;
+
+            updateCalc();
+
+            // Оновити підписи цін біля номерів
+            document.getElementById("price-label-standard").textContent = p.rooms.standard;
+            document.getElementById("price-label-improved").textContent = p.rooms.improved;
+            document.getElementById("price-label-lux").textContent = p.rooms.lux;
+
+            ["calc-room", "calc-days", "calc-persons"].forEach(id => {
+                document.getElementById(id).addEventListener("change", updateCalc);
+            });
+            document.getElementById("calc-days").addEventListener("input", updateCalc);
+            document.getElementById("calc-services-list").addEventListener("change", updateCalc);
+
+
+        }
+
+        function updateCalc() {
+            const roomPrice = parseInt(document.getElementById("calc-room").value) || 0;
+            const days = parseInt(document.getElementById("calc-days").value) || 1;
+            const persons = parseInt(document.getElementById("calc-persons").value) || 1;
+
+            const multipliers = { 1: 1, 2: 1, 3: 1.1, 4: 1.2, 5: 1.3, 6: 1.4 };
+            const mult = multipliers[persons] || 1;
+
+            let servicesTotal = 0;
+            ["svc-massage", "svc-pool", "svc-physio"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.checked) servicesTotal += parseInt(el.value) || 0;
+            });
+
+            const roomTotal = Math.round(roomPrice * days * mult);
+            const total = roomTotal + servicesTotal;
+            const roomName = document.getElementById("calc-room").selectedOptions[0]?.text.split(" -")[0] || "";
+
+            document.getElementById("calc-amount").textContent = total.toLocaleString("uk-UA") + " грн";
+            document.getElementById("calc-breakdown").textContent =
+                `${roomName} × ${days} доби × ${persons} особа` +
+                (servicesTotal ? ` + послуги ${servicesTotal} грн` : "");
+        }
+
+        document.addEventListener("DOMContentLoaded", initCalculator);
+    </script>
+    <footer>© 2026 VitaRelax · м. Одеса</footer>
+    <script src="validation.js"></script>
+    <script src="booking.js"></script>
+
+</body>
+
+</html>

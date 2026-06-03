@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="about.html">Про нас</a>
+        <a href="services.html">Послуги</a>
+        <a href="rooms.html">Номери</a>
+        <a href="login.html">Вхід</a>
+    </nav>
+
+    <div class="container">
+        <h1>Реєстрація</h1>
+
+        <form id="register-form">
+            <label for="reg-name">Ім'я</label>
+            <input type="text" id="reg-name" placeholder="Іван Петренко" autocomplete="name">
+
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" placeholder="your@gmail.com" autocomplete="email">
+
+            <label for="reg-password">Пароль</label>
+            <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password">
+
+            <input type="submit" value="Зареєструватися">
+        </form>
+
+        <hr>
+        <p>Вже є акаунт? <a href="login.html">Увійти</a></p>
+    </div>
+
+    <footer>© 2026 VitaRelax · м. Одеса</footer>
+    <script src="validation.js"></script>
+</body>
+
+</html>
